@@ -3,11 +3,21 @@ abstract class Personagem{
     int pontosDeVida;
     int forca;
 
-    void inicializacao(){}
+    public Personagem(String nome, int forca, int pontosDeVida){
+        super();
+        this.nome = nome;
+        this.forca = forca;
+        this.pontosDeVida = pontosDeVida;
 
-    void receberDano() {}
+    }
 
-    void exibirStatus() {}
+    void receberDano() {
+        this.pontosDeVida -= 10;
+    }
 
-    void atacar(Personagem alvo) {}
+    void exibirStatus() {
+        System.out.println(this.pontosDeVida);
+    }
+
+    public abstract void atacar(Personagem alvo);
 }
