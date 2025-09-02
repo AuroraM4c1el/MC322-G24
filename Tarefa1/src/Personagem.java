@@ -3,11 +3,24 @@ abstract class Personagem{
     int pontosDeVida;
     int forca;
 
-    void inicializacao(){}
+    Personagem(String nome, int pontosDeVida, int forca) {
+        this.nome = nome;
+        this.pontosDeVida = pontosDeVida;
+        this.forca = forca;
+    }
 
-    void receberDano() {}
+    void receberDano(int dano) {
+        pontosDeVida -= dano;
+        if (pontosDeVida < 0) {
+            System.out.println(nome + " foi derrotado!");
+        }
+    }
 
-    void exibirStatus() {}
+    void exibirStatus() {
+        System.out.println("Nome: " + nome);
+        System.out.println("Pontos de Vida: " + pontosDeVida);
+        System.out.println("Força: " + forca);
+    }
 
-    void atacar(Personagem alvo) {}
+    abstract void atacar(Personagem alvo);
 }
