@@ -9,6 +9,14 @@ abstract class Personagem{
         this.forca = forca;
     }
 
+    String getNome() {
+        return nome;
+    }
+
+    int getForca() {
+        return forca;
+    }
+
     void receberDano(int dano) {
         pontosDeVida -= dano;
         if (pontosDeVida < 0) {

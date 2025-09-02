@@ -10,6 +10,14 @@ abstract class Heroi extends Personagem {
 
     void ganharExperiencia(int xp) {
         experiencia += xp;
+        if (experiencia >= Math.pow(2, nivel)) {
+            nivel++;
+            System.out.println(getNome() + " subiu para o nível " + nivel + "!");
+        }
+    }
+
+    int getNivel() {
+        return nivel;
     }
 
     @Override
@@ -19,5 +27,5 @@ abstract class Heroi extends Personagem {
         System.out.println("Experiência: " + experiencia);
     }
 
-    abstract void usarHabilidadeEspecial();
+    abstract void usarHabilidadeEspecial(Personagem[] Monstros);
 }
