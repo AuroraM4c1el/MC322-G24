@@ -1,5 +1,5 @@
 class KohLadraoDeRostos extends Monstro{
-    
+
     public KohLadraoDeRostos(String nome, int pontosDeVida, int forca, int xpConcedido) {
         super(nome, pontosDeVida, forca, xpConcedido);
     }
@@ -7,7 +7,7 @@ class KohLadraoDeRostos extends Monstro{
     @Override
     public void atacar(Personagem alvo) {
         System.out.println(getNome() + " atacou " + alvo.getNome() + "!");
-        alvo.receberDano(10);
+        alvo.receberDano(5);
     }
 
 }

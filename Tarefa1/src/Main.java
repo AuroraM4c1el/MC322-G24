@@ -5,13 +5,13 @@ public class Main {
 
         // Três monstros diferentes (exemplos; ajuste aos nomes/classes do seu projeto)
         Monstro[] monstros = new Monstro[] {
-            new KohLadraoDeRostos("Koh, o Ladrão de Rostos,", 40, 8, 15),
-            new Zuko("Zuko", 55, 10, 20),
-            new OzaiSenhorDoFogo("Ozai", 70, 12, 30)
+            new KohLadraoDeRostos("Koh, o Ladrão de Rostos,", 100, 8, 15),
+            new Zuko("Zuko", 150, 10, 20),
+            new OzaiSenhorDoFogo("Ozai", 200, 12, 30)
         };
 
         System.out.println("=== O HERÓI ENTRA NA MASMORRA PARA ENFRENTAR TRÊS DESAFIOS! ===");
-        System.out.println("Um mestre da água busca sobreviver a três encontros consecutivos...\n");
+        System.out.println("Um mestre da terra busca sobreviver a três encontros consecutivos...\n");
         System.out.println("-- STATUS INICIAL DO HERÓI --");
         heroi.exibirStatus();
 
@@ -21,22 +21,25 @@ public class Main {
             System.out.println("\n===== INÍCIO DO TURNO " + (turno + 1) + " =====");
             System.out.println("Surge o inimigo: " + atual.getNome());
 
-            // Herói ataca primeiro
-            heroi.atacar(atual);
+            while(atual.getPontosDeVida() > 0 && heroi.getPontosDeVida() > 0){
 
-            // Se o monstro morreu, concede XP e segue
-            if (atual.getPontosDeVida() <= 0) {
-                System.out.println(atual.getNome() + " foi derrotado!");
-                heroi.ganharExperiencia(atual.getXpConcedido());
-            } else {
-                // Monstro contra-ataca
-                atual.atacar(heroi);
-            }
+                // Herói ataca primeiro
+                heroi.atacar(atual);
 
-            // Verifica sobrevivência do herói
-            if (heroi.getPontosDeVida() <= 0) {
-                System.out.println("\n*** GAME OVER: o herói tombou no turno " + (turno + 1) + ". ***");
-                break;
+                // Se o monstro morreu, concede XP e segue
+                if (atual.getPontosDeVida() <= 0) {
+                    System.out.println(atual.getNome() + " foi derrotado!");
+                    heroi.ganharExperiencia(atual.getXpConcedido());
+                } else {
+                    // Monstro contra-ataca
+                    atual.atacar(heroi);
+                }
+
+                // Verifica sobrevivência do herói
+                if (heroi.getPontosDeVida() <= 0) {
+                    System.out.println("\n*** GAME OVER: o herói tombou no turno " + (turno + 1) + ". ***");
+                    break;
+                }
             }
 
             // Status ao final do turno

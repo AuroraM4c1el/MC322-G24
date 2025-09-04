@@ -24,6 +24,7 @@ public abstract class Personagem {
     public void receberDano(int dano) {
         pontosDeVida -= dano;
         if (pontosDeVida < 0) {
+            pontosDeVida = 0;
             System.out.println(nome + " foi derrotado!");
         }
     }
