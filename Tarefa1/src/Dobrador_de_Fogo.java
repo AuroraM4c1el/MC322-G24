@@ -1,4 +1,4 @@
-public class Dobrador_de_Fogo extends Heroi {
+class Dobrador_de_Fogo extends Heroi {
 
     private int fervor;
 

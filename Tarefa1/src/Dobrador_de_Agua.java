@@ -2,14 +2,14 @@ public class Dobrador_de_Agua extends Heroi {
 
     private int calma;
 
-    Dobrador_de_Agua(String nome, int pontosDeVida, int forca, int nivel, int experiencia, int calma) {
+    public Dobrador_de_Agua(String nome, int pontosDeVida, int forca, int nivel, int experiencia, int calma) {
         super(nome, pontosDeVida, forca, nivel, experiencia);
         this.calma = calma;
     }
 
     @Override
-    void usarHabilidadeEspecial(Personagem[] Monstros) {
-        System.out.println(getNome() + " usou a habilidade especial: Tsunami!");
+    public void usarHabilidadeEspecial(Personagem[] Monstros) {
+        System.out.println(getNome() + " usou a habilidade especial: Onda Devastadora!");
         for (Personagem monstro : Monstros) {
             monstro.receberDano(calcularDano(true));
         }
@@ -24,7 +24,7 @@ public class Dobrador_de_Agua extends Heroi {
         return dano;
     }
 
-    void atacar(Personagem alvo) {
+    public void atacar(Personagem alvo) {
         System.out.println(getNome() + " atacou " + alvo.getNome() + "!");
         alvo.receberDano(calcularDano(false));
     }

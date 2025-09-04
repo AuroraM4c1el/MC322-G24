@@ -2,13 +2,13 @@ public class Dobrador_de_Terra extends Heroi {
 
     private int determinacao;
 
-    Dobrador_de_Terra(String nome, int pontosDeVida, int forca, int nivel, int experiencia, int determinacao) {
+    public Dobrador_de_Terra(String nome, int pontosDeVida, int forca, int nivel, int experiencia, int determinacao) {
         super(nome, pontosDeVida, forca, nivel, experiencia);
         this.determinacao = determinacao;
     }
 
     @Override
-    void usarHabilidadeEspecial(Personagem[] Monstros) {
+    public void usarHabilidadeEspecial(Personagem[] Monstros) {
         System.out.println(getNome() + " usou a habilidade especial: Terremoto!");
         for (Personagem monstro : Monstros) {
             monstro.receberDano(calcularDano(true));
@@ -24,7 +24,7 @@ public class Dobrador_de_Terra extends Heroi {
         return dano;
     }
 
-    void atacar(Personagem alvo) {
+    public void atacar(Personagem alvo) {
         System.out.println(getNome() + " atacou " + alvo.getNome() + "!");
         alvo.receberDano(calcularDano(false));
     }

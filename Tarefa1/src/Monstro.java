@@ -1,15 +1,19 @@
-abstract class Monstro extends Personagem {
+public abstract class Monstro extends Personagem {
     private int xpConcedido;
 
-    Monstro(String nome, int pontosDeVida, int forca, int xpConcedido) {
+    public Monstro(String nome, int pontosDeVida, int forca, int xpConcedido) {
         super(nome, pontosDeVida, forca);
         this.xpConcedido = xpConcedido;
     }
 
     @Override
-    void exibirStatus() {
+    public void exibirStatus() {
         super.exibirStatus();
         System.out.println("XP Concedido: " + xpConcedido);
+    }
+
+    public int getXpConcedido() {
+        return xpConcedido;
     }
 }
 

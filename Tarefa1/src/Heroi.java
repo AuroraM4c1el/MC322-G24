@@ -1,14 +1,14 @@
-abstract class Heroi extends Personagem {
+public abstract class Heroi extends Personagem {
     private int nivel;
     private int experiencia;
 
-    Heroi(String nome, int pontosDeVida, int forca, int nivel, int experiencia) {
+    public Heroi(String nome, int pontosDeVida, int forca, int nivel, int experiencia) {
         super(nome, pontosDeVida, forca);
         this.nivel = nivel;
         this.experiencia = experiencia;
     }
 
-    void ganharExperiencia(int xp) {
+    public void ganharExperiencia(int xp) {
         experiencia += xp;
         if (experiencia >= Math.pow(2, nivel)) {
             nivel++;
@@ -16,16 +16,16 @@ abstract class Heroi extends Personagem {
         }
     }
 
-    int getNivel() {
+    public int getNivel() {
         return nivel;
     }
 
     @Override
-    void exibirStatus() {
+    public void exibirStatus() {
         super.exibirStatus();
         System.out.println("Nível: " + nivel);
         System.out.println("Experiência: " + experiencia);
     }
 
-    abstract void usarHabilidadeEspecial(Personagem[] Monstros);
+    public abstract void usarHabilidadeEspecial(Personagem[] Monstros);
 }
