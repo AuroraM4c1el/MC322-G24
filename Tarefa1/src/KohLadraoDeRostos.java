@@ -7,7 +7,7 @@ class KohLadraoDeRostos extends Monstro{
     @Override
     public void atacar(Personagem alvo) {
         System.out.println(getNome() + " atacou " + alvo.getNome() + "!");
-        alvo.receberDano(5);
+        alvo.receberDano((int) (getForca() * 0.4));
     }
 
 }

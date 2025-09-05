@@ -6,6 +6,6 @@ class OzaiSenhorDoFogo extends Monstro{
     @Override
     public void atacar(Personagem alvo) {
         System.out.println(getNome() + " atacou " + alvo.getNome() + "!");
-        alvo.receberDano(10);
+        alvo.receberDano((int) (getForca() * 0.8));
     }
 }

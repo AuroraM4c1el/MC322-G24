@@ -5,7 +5,7 @@ public class Main {
 
         // Três monstros diferentes (exemplos; ajuste aos nomes/classes do seu projeto)
         Monstro[] monstros = new Monstro[] {
-            new KohLadraoDeRostos("Koh, o Ladrão de Rostos,", 100, 8, 15),
+            new KohLadraoDeRostos("Koh, o Ladrão de Rostos,", 100, 30, 15),
             new Zuko("Zuko", 150, 10, 20),
             new OzaiSenhorDoFogo("Ozai", 200, 12, 30)
         };
