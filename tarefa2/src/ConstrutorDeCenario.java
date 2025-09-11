@@ -1,7 +1,7 @@
 
 
 class ConstrutorDeCenario {
-    Fases[] gerarFases(int nFases) {
-        return [];
+    Fase[] gerarFases(int nFases) {
+        return new Fase[nFases];
     }
 }

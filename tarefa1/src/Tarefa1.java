@@ -1,4 +1,4 @@
-public class Main {
+public class Tarefa1 {
     public static void main(String[] args) {
         // Herói único do cenário (use valores que façam sentido no seu balanceamento)
         Heroi heroi = new Dobrador_de_Terra("Toph", 90, 20, 5, 0, 30);
