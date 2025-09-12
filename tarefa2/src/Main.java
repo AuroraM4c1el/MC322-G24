@@ -1,57 +1,85 @@
+import java.util.List;
+import java.util.Random;
+
 public class Main {
     public static void main(String[] args) {
-        // Herói único do cenário (use valores que façam sentido no seu balanceamento)
-        Heroi heroi = new Dobrador_de_Terra("Toph", 90, 20, 5, 0, 30);
+        // Criar herói único do cenário
+        Random rand = new Random();
 
-        // Três monstros diferentes (exemplos; ajuste aos nomes/classes do seu projeto)
-        Monstro[] monstros = new Monstro[] {
-            new KohLadraoDeRostos("Koh, o Ladrão de Rostos", 100, 10, 15),
-            new Zuko("Zuko", 150, 15, 20),
-            new OzaiSenhorDoFogo("Ozai", 200, 12, 30)
-        };
+        // Gera um valor aleatório entre 0.0 e 1.0
+        float sorteAleatoria = rand.nextFloat();
 
-        System.out.println("=== O HERÓI ENTRA NA MASMORRA PARA ENFRENTAR TRÊS DESAFIOS! ===");
-        System.out.println("Um mestre da terra busca sobreviver a três encontros consecutivos...\n");
+        // Cria o herói com o último parâmetro aleatório
+        Heroi heroi = new Dobrador_de_Ar(
+            "Aang", 
+            90, 
+            20, 
+            5, 
+            0, 
+            30, 
+            new Planador(15, 2), 
+            50, 
+            sorteAleatoria
+        );
+
+        // Gerar 3 fases usando método estático (substitua ConstrutorDeCenario pelo nome da sua classe)
+        List<Fase> fases = ConstrutorDeCenario.gerarFases(3);
+
+        System.out.println("=== O HERÓI ENTRA NO DESAFIO DE SOBREVIVÊNCIA! ===");
+        System.out.println("Um mestre da terra deve enfrentar todas as fases...\n");
         System.out.println("-- STATUS INICIAL DO HERÓI --");
         heroi.exibirStatus();
 
-        // Loop de 3 turnos (um por monstro)
-        for (int turno = 0; turno < monstros.length; turno++) {
-            Monstro atual = monstros[turno];
-            System.out.println("\n===== INÍCIO DO TURNO " + (turno + 1) + " =====");
-            System.out.println("Surge o inimigo: " + atual.getNome());
+        // Loop por cada fase
+        for (int faseIndex = 0; faseIndex < fases.size(); faseIndex++) {
+            Fase faseAtual = fases.get(faseIndex);
 
-            while(atual.getPontosDeVida() > 0 && heroi.getPontosDeVida() > 0){
+            System.out.println("\n===== INÍCIO DA FASE " + faseAtual.getNivel() + " - " + faseAtual.getAmbiente() + " =====");
+            System.out.println("O HERÓI ENTRA NA " + faseAtual.getAmbiente() + " PARA ENFRENTAR " + faseAtual.getMonstros().length + " MONSTROS!");
+            heroi.exibirStatus();
 
-                // Herói ataca primeiro
-                heroi.atacar(atual);
+            // Loop por cada monstro da fase
+            for (Monstro monstro : faseAtual.getMonstros()) {
+                System.out.println("\nSurge o inimigo: " + monstro.getNome());
 
-                // Se o monstro morreu, concede XP e segue
-                if (atual.getPontosDeVida() <= 0) {
-                    System.out.println(atual.getNome() + " foi derrotado!");
-                    heroi.ganharExperiencia(atual.getXpConcedido());
-                } else {
-                    // Monstro contra-ataca
-                    atual.atacar(heroi);
+                // Combate enquanto ambos estiverem vivos
+                while (heroi.getPontosDeVida() > 0 && monstro.getPontosDeVida() > 0) {
+                    // Herói ataca primeiro
+                    heroi.atacar(monstro);
+
+                    if (monstro.getPontosDeVida() <= 0) {
+                        System.out.println(monstro.getNome() + " foi derrotado!");
+                        heroi.ganharExperiencia(monstro.getXpConcedido());
+
+                        // Testa a sorte do herói para largar/pegar arma
+                        if ( heroi.getSorte() > 0.5 ) { // sorte maior que 50%
+                            System.out.println("O herói encontrou uma arma largada pelo monstro!");
+                            monstro.largaArma();
+                        }
+
+                        break; // passa para o próximo monstro
+                    } else {
+                        // Monstro contra-ataca
+                        monstro.atacar(heroi);
+                    }
+
+                    // Verifica se herói foi derrotado
+                    if (heroi.getPontosDeVida() <= 0) {
+                        System.out.println("\n*** GAME OVER: o herói tombou na fase " + faseAtual.getNivel() + ". ***");
+                        return;
+                    }
                 }
 
-                // Verifica sobrevivência do herói
-                if (heroi.getPontosDeVida() <= 0) {
-                    System.out.println("\n*** GAME OVER: o herói tombou no turno " + (turno + 1) + ". ***");
-                    break;
-                }
+                // Status após cada monstro
+                System.out.println("\n-- STATUS AO FINAL DO COMBATE --");
+                heroi.exibirStatus();
+                monstro.exibirStatus();
             }
 
-            // Status ao final do turno
-            System.out.println("\n-- STATUS AO FINAL DO TURNO " + (turno + 1) + " --");
-            heroi.exibirStatus();
-            atual.exibirStatus();
-            System.out.println("===== FIM DO TURNO " + (turno + 1) + " =====");
+            System.out.println("===== FIM DA FASE " + faseAtual.getNivel() + " =====\n");
         }
 
-        // Vitória se ainda estiver vivo após os 3 turnos
-        if (heroi.getPontosDeVida() > 0) {
-            System.out.println("\n*** VITÓRIA! O herói sobreviveu aos três desafios. ***");
-        }
+        // Se sobreviveu a todas as fases
+        System.out.println("\n*** VITÓRIA! O herói sobreviveu a todas as fases! ***");
     }
 }
