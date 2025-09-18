@@ -2,8 +2,8 @@ class Dobrador_de_Fogo extends Heroi {
 
     private int fervor;
 
-    Dobrador_de_Fogo(String nome, int pontosDeVida, int forca, int nivel, int experiencia, int fervor) {
-        super(nome, pontosDeVida, forca, nivel, experiencia);
+    Dobrador_de_Fogo(String nome, int pontosDeVida, int forca, int nivel, int experiencia, int fervor, Arma arma, int expProximoNivel, float sorte) {
+        super(nome, pontosDeVida, forca, nivel, experiencia, arma, expProximoNivel, sorte);
         this.fervor = fervor;
     }
 

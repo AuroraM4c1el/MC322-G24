@@ -1,8 +1,8 @@
 class Zuko extends Monstro {
 
 
-    public Zuko(String nome, int pontosDeVida, int forca, int xpConcedido) {
-        super(nome, pontosDeVida, forca, xpConcedido);
+    public Zuko(String nome, int pontosDeVida, int forca, int xpConcedido, Arma arma) {
+        super(nome, pontosDeVida, forca, xpConcedido, arma);
     }
 
     @Override

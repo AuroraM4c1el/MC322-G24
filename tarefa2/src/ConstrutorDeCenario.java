@@ -28,21 +28,21 @@ public class ConstrutorDeCenario {
             switch (i) {
                 case 1:
                     monstros = new Monstro[] {
-                        new KohLadraoDeRostos("Koh, o Ladrão de Rostos", 100, 10, 15),
-                        new Zuko("Zuko", 150, 15, 20)
+                        new KohLadraoDeRostos("Koh, o Ladrão de Rostos", 100, 10, 15, new Planador(10, 5)),
+                        new Zuko("Zuko", 150, 15, 20, new Planador(10, 5))
                     };
                     break;
                 case 2:
                     monstros = new Monstro[] {
-                        new Zuko("Zuko", 150, 15, 25),
-                        new OzaiSenhorDoFogo("Ozai", 200, 20, 30)
+                        new Zuko("Zuko", 150, 15, 25, new Planador(10, 5)),
+                        new OzaiSenhorDoFogo("Ozai", 200, 20, 30, new Planador(10, 5))
                     };
                     break;
                 default:
                     monstros = new Monstro[] {
-                        new KohLadraoDeRostos("Koh, o Ladrão de Rostos", 120 + i*10, 12 + i, 20 + i*5),
-                        new Zuko("Zuko", 170 + i*10, 18 + i, 25 + i*5),
-                        new OzaiSenhorDoFogo("Ozai", 220 + i*10, 22 + i, 35 + i*5)
+                        new KohLadraoDeRostos("Koh, o Ladrão de Rostos", 120 + i*10, 12 + i, 20 + i*5, new Planador(10, 5)),
+                        new Zuko("Zuko", 170 + i*10, 18 + i, 25 + i*5, new Planador(10, 5)),
+                        new OzaiSenhorDoFogo("Ozai", 220 + i*10, 22 + i, 35 + i*5, new Planador(10, 5))
                     };
                     break;
             }

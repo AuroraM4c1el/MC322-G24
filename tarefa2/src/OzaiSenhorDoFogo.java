@@ -1,8 +1,8 @@
 
 
 class OzaiSenhorDoFogo extends Monstro{
-    public OzaiSenhorDoFogo(String nome, int pontosDeVida, int forca, int xpConcedido) {
-        super(nome, pontosDeVida, forca, xpConcedido);
+    public OzaiSenhorDoFogo(String nome, int pontosDeVida, int forca, int xpConcedido, Arma arma) {
+        super(nome, pontosDeVida, forca, xpConcedido, arma);
     }
 
     @Override
