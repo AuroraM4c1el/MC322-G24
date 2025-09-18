@@ -49,12 +49,14 @@ public class Main {
 
                     if (monstro.getPontosDeVida() <= 0) {
                         System.out.println(monstro.getNome() + " foi derrotado!");
+
                         heroi.ganharExperiencia(monstro.getXpConcedido());
 
                         // Testa a sorte do herói para largar/pegar arma
                         if ( heroi.getSorte() > 0.5 ) { // sorte maior que 50%
                             System.out.println("O herói encontrou uma arma largada pelo monstro!");
-                            monstro.largaArma();
+                            
+                            heroi.equiparArma(monstro.largaArma());
                         }
 
                         break; // passa para o próximo monstro
