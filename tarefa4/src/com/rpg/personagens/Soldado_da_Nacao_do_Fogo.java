@@ -1,5 +1,11 @@
-public class Soldado_da_Nacao_do_Fogo extends Monstro {
+package com.rpg.personagens;
 
+import com.rpg.combates.AtaqueFisico;
+import com.rpg.itens.Arma;
+import com.rpg.itens.Adaga_Carbonizada;
+import com.rpg.itens.Item;
+
+public class Soldado_da_Nacao_do_Fogo extends Monstro {
 
     public Soldado_da_Nacao_do_Fogo(String nome, int pontosDeVida, int forca, int xpConcedido, Arma arma) {
         super(nome, pontosDeVida, forca, xpConcedido, arma);
