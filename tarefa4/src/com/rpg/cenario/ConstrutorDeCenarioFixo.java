@@ -32,17 +32,17 @@ public class ConstrutorDeCenarioFixo implements GeradorDeFases {
         double forcaMultiplicada = dificuldade.getMultiplicadorForca();
         switch (nivel) {
             case 1:
-            lista[0] = new Soldado_da_Nacao_do_Fogo("Soldado da Nacao do Fogo", (int)(150 * vidaMultiplicada), (int)(15 * forcaMultiplicada), 20, new Adaga_Carbonizada(10, 5));
-            lista[1] = new Koh_Ladrao_de_Rostos("Koh, o Ladrão de Rostos", (int)(100 * vidaMultiplicada), (int)(10 * forcaMultiplicada), 30, new Mascara(10, 5));
+            lista[0] = new Soldado_da_Nacao_do_Fogo("Soldado da Nacao do Fogo", (int)(100 * vidaMultiplicada), (int)(15 * forcaMultiplicada), 20, new Adaga_Carbonizada(10, 5));
+            lista[1] = new Koh_Ladrao_de_Rostos("Koh, o Ladrão de Rostos", (int)(120 * vidaMultiplicada), (int)(10 * forcaMultiplicada), 30, new Mascara(10, 5));
             break;
             case 2:
-            lista[0] = new Ozai_Senhor_do_Fogo("Ozai", (int)(200 * vidaMultiplicada), (int)(20 * forcaMultiplicada), 30, new Cetro(10, 5));
-            lista[1] = new Soldado_da_Nacao_do_Fogo("Soldado da Nacao do Fogo", (int)(150 * vidaMultiplicada), (int)(15 * forcaMultiplicada), 25, new Adaga_Carbonizada(10, 5));
+            lista[0] = new Ozai_Senhor_do_Fogo("Ozai", (int)(120 * vidaMultiplicada), (int)(13 * forcaMultiplicada), 30, new Cetro(10, 5));
+            lista[1] = new Soldado_da_Nacao_do_Fogo("Soldado da Nacao do Fogo", (int)(130 * vidaMultiplicada), (int)(15 * forcaMultiplicada), 25, new Adaga_Carbonizada(10, 5));
             break;
             default:
-            lista[0] = new Koh_Ladrao_de_Rostos("Koh, o Ladrão de Rostos", (int)((120 + nivel * 10) * vidaMultiplicada), (int)((12 + nivel) * forcaMultiplicada), 20 + nivel * 5, new Mascara(10, 5));
-            lista[1] = new Soldado_da_Nacao_do_Fogo("Soldado da Nacao do Fogo", (int)((170 + nivel * 10) * vidaMultiplicada), (int)((18 + nivel) * forcaMultiplicada), 25 + nivel * 5, new Adaga_Carbonizada(10, 5));
-            lista[2] = new Ozai_Senhor_do_Fogo("Ozai", (int)((220 + nivel * 10) * vidaMultiplicada), (int)((22 + nivel) * forcaMultiplicada), 35 + nivel * 5, new Cetro(10, 5));
+            lista[0] = new Koh_Ladrao_de_Rostos("Koh, o Ladrão de Rostos", (int)((130 + nivel * 10) * vidaMultiplicada), (int)((12 + nivel) * forcaMultiplicada), 20 + nivel * 5, new Mascara(10, 5));
+            lista[1] = new Soldado_da_Nacao_do_Fogo("Soldado da Nacao do Fogo", (int)((140 + nivel * 10) * vidaMultiplicada), (int)((15 + nivel) * forcaMultiplicada), 25 + nivel * 5, new Adaga_Carbonizada(10, 5));
+            lista[2] = new Ozai_Senhor_do_Fogo("Ozai", (int)((150 + nivel * 10) * vidaMultiplicada), (int)((18 + nivel) * forcaMultiplicada), 35 + nivel * 5, new Cetro(10, 5));
             break;
         }
         return lista;

@@ -5,10 +5,20 @@ import com.rpg.cenario.Dificuldade;
 import com.rpg.cenario.Fase;
 import com.rpg.cenario.FaseDeCombate;
 import com.rpg.cenario.GeradorDeFases;
+import com.rpg.itens.Adaga_Carbonizada;
+import com.rpg.itens.Cetro;
+import com.rpg.itens.Mascara;
 import com.rpg.itens.Planador;
+import com.rpg.personagens.Dobrador_de_Agua;
 import com.rpg.personagens.Dobrador_de_Ar;
+import com.rpg.personagens.Dobrador_de_Terra;
 import com.rpg.personagens.Heroi;
+import com.rpg.personagens.Koh_Ladrao_de_Rostos;
+import com.rpg.personagens.Monstro;
+import com.rpg.personagens.Ozai_Senhor_do_Fogo;
+import com.rpg.personagens.Soldado_da_Nacao_do_Fogo;
 import com.rpg.util.InputManager;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -17,6 +27,39 @@ import java.util.Random;
 public class Main {
 
     public static void main(String[] args) {
+        Random rand = new Random();
+
+        ArrayList<Heroi> heroisDisponiveis = new ArrayList<>();
+        heroisDisponiveis.add( new Dobrador_de_Ar(
+            "Aang", 
+            150, 
+            20, 
+            5, 
+            0, 
+            30, 
+            new Planador(15, 2), 
+            50, 
+            rand.nextFloat()
+        ));
+        heroisDisponiveis.add( new Dobrador_de_Agua(
+            "Katara", 
+            110, 
+            18, 
+            5, 
+            0, 
+            50, 
+            new Planador(15, 2), 
+            40, 
+            rand.nextFloat()
+        ));
+        heroisDisponiveis.add(new Dobrador_de_Terra("Toph", 90, 20, 5, 10, 30, new Planador(15,2), 40, rand.nextFloat()));
+        
+        Monstro[] lista = new Monstro[3];
+
+        lista[0] = new Koh_Ladrao_de_Rostos("Koh, o Ladrão de Rostos", (int)((130 + 10)), (int)((12)), 20 + 5, new Mascara(10, 5));
+        lista[1] = new Soldado_da_Nacao_do_Fogo("Soldado da Nacao do Fogo", (int)((140 + 10)), (int)((15 )), 25 + 5, new Adaga_Carbonizada(10, 5));
+        lista[2] = new Ozai_Senhor_do_Fogo("Ozai", (int)((150 + 10)), (int)((18)), 35 + 5, new Cetro(10, 5));
+
         int entrada = 0;
         String menu = """
             TERRAS SOMBRIAS - RPG
@@ -32,35 +75,20 @@ public class Main {
         while(entrada != 4){
             switch(entrada){
                 case 1:
-
-                    jogo(escolherDificuldade());
-                    // Jogo novoJogo = new Jogo();
-                    // novoJogo.iniciar();
-                    String menuInterno = "1. Interagir com o Loot (se houver)\n2. Ver Informa ̧c ̃oes do Personagem\n3. Desistir do Jogo\n";
-                    int entradaInterna = 0;
-                    while((entradaInterna != 2) && (entradaInterna != 1) && (entradaInterna != 3)){
-                        entradaInterna = InputManager.lerInteiro(menuInterno, 1, 3);
-                        switch(entradaInterna){
-                            case 1:
-                                // novoJogo.interagirComLoot(); 
-                                break;
-                            case 2:
-                                // novoJogo.exibirInfoHeroi();
-                                break;
-                            case 3:
-                                System.out.println("Desistiu do jogo. Ate a proxima!");
-                                break;
-                            default:
-                                System.out.println("Opcao invalida! Tente novamente.");
-                                break;
-                        }
-                    }
+                    jogo(escolherDificuldade(), heroisDisponiveis.get(0));
                     break;
                 case 2:
-                    // Jogo.exibirInfoHerois();
+                    for (Heroi heroi : heroisDisponiveis) {
+                        heroi.exibirStatus();
+                        System.out.println();
+                    }
                     break;
                 case 3:
-                    // Jogo.exibirInfoMonstros();
+                    for (Monstro elem : lista) {
+                        elem.exibirStatus();
+                        System.out.println();
+                        
+                    }
                     break;
                 default:
                     System.out.println("Opcao invalida! Tente novamente.");
@@ -96,20 +124,8 @@ public class Main {
         }
     }
 
-    public static void jogo(Dificuldade dificuldade) {
-        Random rand = new Random();
-        float sorteAleatoria = rand.nextFloat();
-        Heroi heroi = new Dobrador_de_Ar(
-            "Aang", 
-            90, 
-            20, 
-            5, 
-            0, 
-            30, 
-            new Planador(15, 2), 
-            50, 
-            sorteAleatoria
-        );
+    public static void jogo(Dificuldade dificuldade, Heroi heroi) {
+        
 
         GeradorDeFases gerador = new ConstrutorDeCenarioFixo();
         List<Fase> fases = gerador.gerar(3, dificuldade);
@@ -131,6 +147,7 @@ public class Main {
             faseAtual.iniciar(heroi);
 
             System.out.println("===== FIM DA FASE " + faseAtual.getNivel() + " =====\n");
+
         }
 
         // Se sobreviveu a todas as fases

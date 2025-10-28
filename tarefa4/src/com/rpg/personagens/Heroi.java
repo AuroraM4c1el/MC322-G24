@@ -2,6 +2,8 @@ package com.rpg.personagens;
 
 import com.rpg.combates.AcaoDeCombate;
 import com.rpg.combates.Combatente;
+import com.rpg.exceptions.EquipaExepetion;
+import com.rpg.exceptions.HabilidadeEspecialExeption;
 import com.rpg.itens.Arma;
 import java.util.ArrayList;
 import java.util.List;
@@ -43,9 +45,10 @@ public abstract class Heroi extends Personagem {
         super.exibirStatus();
         System.out.println("Nível: " + nivel);
         System.out.println("Experiência: " + experiencia);
+        System.out.println("Arma: " + (arma != null ? arma.getNome() : "Nenhuma"));
     }
 
-    public abstract void usarHabilidadeEspecial(Personagem[] Monstros);
+    public abstract void usarHabilidadeEspecial(Personagem[] Monstros) throws HabilidadeEspecialExeption;
 
     private void subirDeNivel() {
         nivel++;
@@ -66,15 +69,15 @@ public abstract class Heroi extends Personagem {
         return sorte;
     }
 
-    public void equiparArma(Arma novaArma) {
+    public void equiparArma(Arma novaArma) throws EquipaExepetion{
         if (novaArma.getMinNivel() > this.nivel) {
-            System.out.println("Nível insuficiente para equipar " + novaArma.getNome() + ".");
-            return;
+            throw new EquipaExepetion("Nível insuficiente para equipar " + novaArma.getNome() + ".");
         } else if (this.arma != null && novaArma.getDano() <= this.arma.getDano()) {
-            System.out.println("A arma " + novaArma.getNome() + " é menos poderosa que a arma atual.");
-            return;
+            throw new EquipaExepetion("A arma " + novaArma.getNome() + " é menos poderosa que a arma atual.");
+            
         }
         arma = novaArma;
+        System.out.println(getNome() + " obteve: " + novaArma.getNome());
         this.updateForca(getForca() + (novaArma.getDano() - (this.arma != null ? this.arma.getDano() : 0)));
     }
 }

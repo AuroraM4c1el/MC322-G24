@@ -2,10 +2,13 @@ package com.rpg.cenario;
 
 
 import com.rpg.combates.AcaoDeCombate;
+import com.rpg.exceptions.EquipaExepetion;
 import com.rpg.itens.Arma;
 import com.rpg.itens.Item;
 import com.rpg.personagens.Heroi;
 import com.rpg.personagens.Monstro;
+import com.rpg.util.InputManager;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
 
@@ -27,7 +30,7 @@ public class FaseDeCombate implements Fase {
         System.out.println("Iniciando fase de combate: " + getAmbiente() + " (Nível " + nivel + ")");
         System.out.println("\n=== " + ambiente + " - " + ambiente.getDescricao() + " ===");
         ambiente.aplicarEfeitos(heroi);
-
+        ArrayList<Item> loot = new ArrayList<>();
         Iterator<Monstro> iterator = Arrays.asList(monstros).iterator();
         while (iterator.hasNext() && heroi.estaVivo()) {
             Monstro monstro = iterator.next();
@@ -49,14 +52,52 @@ public class FaseDeCombate implements Fase {
                 return;
             } else {
                 heroi.ganharExperiencia(monstro.getXpConcedido());
-                Item loot = monstro.droparLoot();
-                System.out.println(heroi.getNome() + " obteve: " + loot.getNome());
-                heroi.equiparArma((Arma) loot);
+                loot.add(monstro.droparLoot());
+                
             }
         }
 
         this.concluida = true;
         System.out.println("Fase concluída! O herói sobreviveu.");
+        //menu interno
+            String menuInterno = "1. Interagir com o Loot (se houver)\n2. Ver Informacoes do Personagem\n3. Desistir do Jogo\n";
+            int entradaInterna = 0;
+            while((entradaInterna != 2) && (entradaInterna != 1) && (entradaInterna != 3)){
+                entradaInterna = InputManager.lerInteiro(menuInterno, 1, 3);
+                switch(entradaInterna){
+                    case 1:
+                        int i = 0;
+                        String mensagem = "Escolha o indice do item que deseja equipar:\n";
+                        for(i=0; i< loot.size(); i++){
+                            mensagem += "[" + i + "] " + loot.get(i).getNome() + "\n";
+                        }
+                        mensagem += "[" + i + "] Nenhum Loot\n";
+                        mensagem += "Escolha o indice do item que deseja equipar: ";
+                        int escolhaLoot = InputManager.lerInteiro(mensagem, 0, i);
+                        if(escolhaLoot == i){
+                            System.out.println("Nenhum loot foi equipado.");
+                        } else {
+                            System.out.println("Equipando loot...");
+                            try {
+                                heroi.equiparArma((Arma) loot.get(escolhaLoot));
+                            } catch (EquipaExepetion e) {
+                                System.out.println("Arma não equipada pois " + e.getMessage());
+                            }
+                        }
+                        break;
+                    case 2:
+                        heroi.exibirStatus();
+                        break;
+                    case 3:
+                        System.out.println("Desistiu do jogo. Ate a proxima!");
+                        heroi.updatePontosDeVida(0);
+                        break;
+                    default:
+                        System.out.println("Opcao invalida! Tente novamente.");
+                        break;
+                }
+                InputManager.esperarEnter("Pressione Enter para continuar...\n");
+            }
     }
 
     @Override

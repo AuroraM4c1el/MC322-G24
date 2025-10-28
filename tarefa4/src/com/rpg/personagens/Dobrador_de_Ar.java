@@ -2,6 +2,7 @@ package com.rpg.personagens;
 
 import com.rpg.combates.AtaqueFisico;
 import com.rpg.combates.Furacao;
+import com.rpg.exceptions.HabilidadeEspecialExeption;
 import com.rpg.itens.Arma;
 
 public class Dobrador_de_Ar extends Heroi {
@@ -16,14 +17,18 @@ public class Dobrador_de_Ar extends Heroi {
     }
 
     @Override
-    public void usarHabilidadeEspecial(Personagem[] Monstros) {
-        System.out.println(getNome() + " usou a habilidade especial: Furacão!");
-        for (Personagem monstro : Monstros) {
-            monstro.receberDano(calcularDano(true));
+    public void usarHabilidadeEspecial(Personagem[] Monstros) throws HabilidadeEspecialExeption {
+        if (liberdade < 50) {
+            throw new HabilidadeEspecialExeption("Liberdade insuficiente para usar Furacão.");
+        } else {
+            System.out.println(getNome() + " usou a habilidade especial: Furacão!");
+            for (Personagem monstro : Monstros) {
+                monstro.receberDano(calcularDano(true));
+            }
         }
     }
 
-    private int calcularDano(boolean especial) {
+    private int calcularDano(boolean especial){
         double dano_base = (Math.pow(getNivel(), 2.05) + getForca());
         if (especial) {
             dano_base = (1 + liberdade / 190.0);
@@ -35,6 +40,7 @@ public class Dobrador_de_Ar extends Heroi {
     public void atacar(Personagem alvo) {
         System.out.println(getNome() + " atacou " + alvo.getNome() + "!");
         alvo.receberDano(calcularDano(false));
+        
     }
 
     public int getLiberdade() {
